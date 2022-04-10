@@ -103,18 +103,28 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    OutlineButton(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 48, vertical: 24),
+                    ElevatedButton(
                       onPressed: hireMe,
-                      color: Colors.white,
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(32),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(MAIN_COLOR),
+                        padding: MaterialStateProperty.all(
+                          const EdgeInsets.symmetric(
+                            horizontal: 48,
+                            vertical: 24,
+                          ),
+                        ),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32),
+                            side: const BorderSide(
+                              color: Colors.white,
+                              style: BorderStyle.solid,
+                              width: 1,
+                            ),
+                          ),
+                        ),
                       ),
-                      borderSide: const BorderSide(
-                          color: Colors.white,
-                          style: BorderStyle.solid,
-                          width: 1),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: const <Widget>[

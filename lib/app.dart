@@ -101,7 +101,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget _buildListDetail(bool forTablet) {
     return Scrollbar(
-      isAlwaysShown: true,
+      // isAlwaysShown: true,
       scrollbarOrientation: ScrollbarOrientation.right,
       controller: scrollBar,
       child: SingleChildScrollView(
