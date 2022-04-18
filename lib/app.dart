@@ -100,10 +100,8 @@ class _MainPageState extends State<MainPage> {
   final scrollBar = ScrollController();
 
   Widget _buildListDetail(bool forTablet) {
-    return Scrollbar(
-      // isAlwaysShown: true,
-      scrollbarOrientation: ScrollbarOrientation.right,
-      controller: scrollBar,
+    return ScrollConfiguration(
+      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
       child: SingleChildScrollView(
         controller: scrollBar,
         padding: const EdgeInsets.only(bottom: VERTICAL_PADDING_SIZE),
@@ -194,9 +192,14 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (_, constrain) {
-        return constrain.maxWidth >= MIN_TABLET_SIZE
-            ? _buildTabletBody(constrain.maxWidth)
-            : _buildPhoneBody();
+        return Scrollbar(
+          // isAlwaysShown: true,
+          scrollbarOrientation: ScrollbarOrientation.right,
+          controller: scrollBar,
+          child: constrain.maxWidth >= MIN_TABLET_SIZE
+              ? _buildTabletBody(constrain.maxWidth)
+              : _buildPhoneBody(),
+        );
       },
     );
   }
