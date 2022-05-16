@@ -14,7 +14,7 @@ class AnimatedText extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AnimatedTextState createState() => _AnimatedTextState();
+  State<AnimatedText> createState() => _AnimatedTextState();
 }
 
 class _AnimatedTextState extends State<AnimatedText>

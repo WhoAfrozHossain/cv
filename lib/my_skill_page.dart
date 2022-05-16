@@ -9,7 +9,7 @@ class MySkillPage extends StatefulWidget {
   const MySkillPage(GlobalKey key) : super(key: key);
 
   @override
-  _MySkillPageState createState() => _MySkillPageState();
+  State<MySkillPage> createState() => _MySkillPageState();
 }
 
 class _MySkillPageState extends State<MySkillPage> {

@@ -7,7 +7,7 @@ import 'package:cv/navigation.dart';
 import 'package:cv/tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import 'about_page.dart';
 import 'companies_page.dart';
@@ -50,14 +50,14 @@ class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
 
   @override
-  _MainPageState createState() => _MainPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _downloadCV() {
-    launch(Data.CV_URL);
+    launchUrlString(Data.CV_URL);
   }
 
   void _hireMe() {
@@ -74,8 +74,8 @@ class _MainPageState extends State<MainPage> {
       child: Stack(
         children: <Widget>[
           Opacity(
-            child: Navigation((_) {}),
             opacity: 0,
+            child: Navigation((_) {}),
           ),
           Positioned.fill(
             child: HomePage(

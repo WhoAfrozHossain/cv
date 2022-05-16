@@ -12,7 +12,7 @@ class ReactButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ReactButtonState createState() => _ReactButtonState();
+  State<ReactButton> createState() => _ReactButtonState();
 }
 
 class _ReactButtonState extends State<ReactButton>

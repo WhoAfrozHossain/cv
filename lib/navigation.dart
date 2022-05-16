@@ -38,14 +38,14 @@ class Navigation extends StatelessWidget {
     );
   }
 
-  Widget _buildLinkingButton(IconData iconData, String url) {
+  Widget _buildLinkingButton(IconData iconData, Uri url) {
     return Container(
       width: 32,
       height: 32,
       margin: const EdgeInsets.only(right: 12),
       child: FloatingActionButton(
         onPressed: () {
-          launch(url);
+          launchUrl(url);
         },
         elevation: 2,
         backgroundColor: SUB_COLOR,
@@ -132,19 +132,19 @@ class Navigation extends StatelessWidget {
                 children: <Widget>[
                   _buildLinkingButton(
                     FontAwesomeIcons.facebookF,
-                    Data.FACEBOOK_URL,
+                    Uri.parse(Data.FACEBOOK_URL),
                   ),
                   _buildLinkingButton(
                     FontAwesomeIcons.instagram,
-                    Data.INSTAGRAM_URL,
+                    Uri.parse(Data.INSTAGRAM_URL),
                   ),
                   _buildLinkingButton(
                     FontAwesomeIcons.githubAlt,
-                    Data.GITHUB_URL,
+                    Uri.parse(Data.GITHUB_URL),
                   ),
                   _buildLinkingButton(
                     FontAwesomeIcons.linkedinIn,
-                    Data.LINKEDIN_URL,
+                    Uri.parse(Data.LINKEDIN_URL),
                   ),
                 ],
               ),

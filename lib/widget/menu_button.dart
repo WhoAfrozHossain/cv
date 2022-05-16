@@ -12,7 +12,7 @@ class MenuButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _MenuButtonState createState() => _MenuButtonState();
+  State<MenuButton> createState() => _MenuButtonState();
 }
 
 class _MenuButtonState extends State<MenuButton>

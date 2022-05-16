@@ -33,7 +33,7 @@ class CompanyPage extends StatefulWidget {
   const CompanyPage(GlobalKey key) : super(key: key);
 
   @override
-  _CompanyPageState createState() => _CompanyPageState();
+  State<CompanyPage> createState() => _CompanyPageState();
 }
 
 class _CompanyPageState extends State<CompanyPage> {

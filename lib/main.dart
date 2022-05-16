@@ -1,9 +1,10 @@
 import 'package:cv/app.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+import 'package:cv/url_strategy/url_strategy_native.dart'
+    if (dart.library.html) 'package:cv/url_strategy/url_strategy_web.dart';
 
 void main() {
-  setUrlStrategy(PathUrlStrategy());
+  urlConfig();
 
   runApp(const MyApp());
 }

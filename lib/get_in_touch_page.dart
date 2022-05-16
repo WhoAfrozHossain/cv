@@ -8,7 +8,7 @@ class GetInTouchPage extends StatefulWidget {
   const GetInTouchPage(GlobalKey key) : super(key: key);
 
   @override
-  _GetInTouchPageState createState() => _GetInTouchPageState();
+  State<GetInTouchPage> createState() => _GetInTouchPageState();
 }
 
 class _GetInTouchPageState extends State<GetInTouchPage> {
@@ -146,17 +146,17 @@ class _GetInTouchPageState extends State<GetInTouchPage> {
                 child: buildContactItem(Icons.call, "Phone", Data.PHONE_NUMBER),
               ),
               Expanded(
-                child: buildTextFormField("Your name", nameController),
                 flex: 2,
+                child: buildTextFormField("Your name", nameController),
               ),
               const SizedBox(width: 12),
               Expanded(
+                flex: 2,
                 child: buildTextFormField(
                   "Email address",
                   emailController,
                   isEmail: true,
                 ),
-                flex: 2,
               ),
             ],
           ),
@@ -171,8 +171,8 @@ class _GetInTouchPageState extends State<GetInTouchPage> {
                 child: buildContactItem(Icons.email, "Email", Data.EMAIL),
               ),
               Expanded(
-                child: buildTextFormField("Subject", subjectController),
                 flex: 2,
+                child: buildTextFormField("Subject", subjectController),
               ),
             ],
           ),
@@ -186,6 +186,7 @@ class _GetInTouchPageState extends State<GetInTouchPage> {
                   Icons.my_location, "Location", Data.LOCATION),
             ),
             Expanded(
+              flex: 2,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -200,7 +201,6 @@ class _GetInTouchPageState extends State<GetInTouchPage> {
                   buildSubmitButton(),
                 ],
               ),
-              flex: 2,
             ),
           ],
         ),
