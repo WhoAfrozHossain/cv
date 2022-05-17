@@ -1,4 +1,4 @@
-import 'package:cv/data.dart';
+import 'package:cv/network/models/all_data_model.dart';
 import 'package:flutter/material.dart';
 
 import 'app.dart';
@@ -8,10 +8,13 @@ class HomePage extends StatelessWidget {
   final VoidCallback? downloadCV;
   final VoidCallback? hireMe;
 
+  final AllDataModel? networkData;
+
   const HomePage({
     GlobalKey? key,
     this.downloadCV,
     this.hireMe,
+    required this.networkData,
   }) : super(key: key);
 
   @override
@@ -29,9 +32,9 @@ class HomePage extends StatelessWidget {
                 Flexible(
                   child: Row(
                     children: [
-                      const Text(
-                        "I'm ${Data.NAME}",
-                        style: TextStyle(
+                      Text(
+                        "I'm ${networkData?.data?.info?.name ?? ""}",
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
@@ -51,10 +54,10 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  Data.HOME_SENTENCE,
+                Text(
+                  networkData?.data?.info?.carrierWords ?? "",
                   textAlign: TextAlign.justify,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w100,
                     fontSize: 16,

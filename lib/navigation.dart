@@ -1,15 +1,21 @@
-import 'package:cv/data.dart';
+import 'package:cv/network/models/all_data_model.dart';
+import 'package:cv/network/models/social_model.dart';
+import 'package:cv/widget/custom_image_widget.dart';
 import 'package:cv/widget/menu_button.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'app.dart';
 
+// ignore: must_be_immutable
 class Navigation extends StatelessWidget {
   final Function onTap;
+  final AllDataModel? networkData;
 
-  const Navigation(this.onTap, {Key? key}) : super(key: key);
+  List<SocialModel> socialData = [];
+
+  Navigation(this.onTap, {Key? key, required this.networkData})
+      : super(key: key);
 
   Widget _buildNavigationOption(
     String title,
@@ -38,7 +44,7 @@ class Navigation extends StatelessWidget {
     );
   }
 
-  Widget _buildLinkingButton(IconData iconData, Uri url) {
+  Widget _buildLinkingButton(BuildContext context, String icon, Uri url) {
     return Container(
       width: 32,
       height: 32,
@@ -49,16 +55,12 @@ class Navigation extends StatelessWidget {
         },
         elevation: 2,
         backgroundColor: SUB_COLOR,
-        child: Icon(
-          iconData,
-          color: Colors.white,
-          size: 16,
-        ),
+        child: CustomImageWidget(context: context, imageUrl: icon,height: 16, )
       ),
     );
   }
 
-  Widget _buildNavigation() {
+  Widget _buildNavigation(BuildContext context) {
     return Card(
       color: MAIN_COLOR,
       elevation: 12,
@@ -70,20 +72,21 @@ class Navigation extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const SizedBox(
+              SizedBox(
                 width: 64,
                 height: 64,
-                child: CircleAvatar(
-                  backgroundImage: AssetImage(Data.AVATAR),
-                  backgroundColor: Colors.white,
+                child: CustomImageWidget(
+                  context: context,
+                  imageUrl: networkData?.data?.info?.photo,
+                  radius: 64,
                 ),
               ),
               const SizedBox(height: 24),
               Row(
                 children: [
-                  const Text(
-                    Data.NAME,
-                    style: TextStyle(
+                  Text(
+                    networkData?.data?.info?.name ?? "",
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
@@ -129,30 +132,18 @@ class Navigation extends StatelessWidget {
               const SizedBox(height: 48),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  _buildLinkingButton(
-                    FontAwesomeIcons.facebookF,
-                    Uri.parse(Data.FACEBOOK_URL),
+                children: socialData.map((SocialModel item) => _buildLinkingButton(
+                  context,
+                    item.icon ?? "",
+                    Uri.parse(item.link ?? ""),
                   ),
-                  _buildLinkingButton(
-                    FontAwesomeIcons.instagram,
-                    Uri.parse(Data.INSTAGRAM_URL),
-                  ),
-                  _buildLinkingButton(
-                    FontAwesomeIcons.githubAlt,
-                    Uri.parse(Data.GITHUB_URL),
-                  ),
-                  _buildLinkingButton(
-                    FontAwesomeIcons.linkedinIn,
-                    Uri.parse(Data.LINKEDIN_URL),
-                  ),
-                ],
+                ).toList(),
               ),
               const SizedBox(height: 32),
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  Data.EMAIL,
+                  networkData?.data?.info?.email ?? "",
                   style: TextStyle(
                     color: Colors.white.withOpacity(.5),
                     fontWeight: FontWeight.w100,
@@ -170,6 +161,7 @@ class Navigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildNavigation();
+    socialData = networkData?.data?.social ?? [];
+    return _buildNavigation(context);
   }
 }

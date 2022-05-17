@@ -1,11 +1,14 @@
-import 'package:cv/data.dart';
+import 'package:cv/network/models/all_data_model.dart';
+import 'package:cv/widget/custom_image_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'app.dart';
 import 'base_page.dart';
 
 class AppTabBar extends StatelessWidget {
-  const AppTabBar({Key? key}) : super(key: key);
+  final AllDataModel? networkData;
+
+  const AppTabBar({Key? key, required this.networkData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,27 +28,28 @@ class AppTabBar extends StatelessWidget {
               },
             ),
             const SizedBox(width: 16),
-            const SizedBox(
+            SizedBox(
               width: 32,
               height: 32,
-              child: CircleAvatar(
-                backgroundImage: AssetImage(Data.AVATAR),
-                backgroundColor: Colors.white,
-              ),
+              child: CustomImageWidget(
+                context: context,
+                  imageUrl: networkData?.data?.info?.photo,
+                  radius: 32,
+                ),
             ),
             const SizedBox(width: 16),
             RichText(
-              text: const TextSpan(
+              text: TextSpan(
                 children: <TextSpan>[
                   TextSpan(
-                    text: Data.NAME,
-                    style: TextStyle(
+                    text: networkData?.data?.info?.name ?? "",
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
                   ),
-                  TextSpan(
+                  const TextSpan(
                     text: ' ●',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,

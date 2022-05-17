@@ -1,8 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
 class Data {
-  static const WEB_TITLE = "Afroz - Mobile Developer";
-  static const NAME = "Afroz Hossain";
+  // static const WEB_TITLE = "Afroz - Mobile Developer";
+  // static const NAME = "Afroz";
   static const PHONE_NUMBER = "+8801766226262";
   static const EMAIL = "afrozhossain97@gmail.com";
   static const LOCATION = "Dhaka, Bangladesh";
@@ -16,12 +16,12 @@ class Data {
   static const LINKEDIN_URL =
       "https://www.linkedin.com/in/afroz-nero-04315b143";
 
-  static const HOME_SENTENCE =
-      "To become a successful professional to work in the top corporate and in an innovative and competitive world. It will help me to fully explore myself and realize my potential.";
+  // static const HOME_SENTENCE =
+  //     "To become a successful professional to work in the top corporate and in an innovative and competitive world. It will help me to fully explore myself and realize my potential.";
   // static const HOME_AUTHOR = "Robert C. Martin";
 
   static const ABOUT_PAGE_INFO = {
-    "Name": NAME,
+    // "Name": NAME,
     "Location": LOCATION,
     "Birthday": BIRTHDAY,
     "Email": EMAIL,

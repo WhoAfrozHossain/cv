@@ -1,9 +1,10 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:cv/data.dart';
 import 'package:cv/get_in_touch_page.dart';
 import 'package:cv/home_page.dart';
 import 'package:cv/navigation.dart';
+import 'package:cv/network/models/all_data_model.dart';
+import 'package:cv/network/network_controller.dart';
 import 'package:cv/tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: Data.WEB_TITLE,
+      title: "Afroz Hossain",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: GoogleFonts.openSans().fontFamily,
@@ -56,8 +57,24 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  AllDataModel? allData;
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 1)).then((value) => getNetworkAllData());
+    super.initState();
+  }
+
+  getNetworkAllData() async {
+    await NetworkController(context: context).getAllData().then((value) {
+      setState(() {
+        allData = value;
+      });
+    });
+  }
+
   void _downloadCV() {
-    launchUrlString(Data.CV_URL);
+    launchUrlString("http://afrozhossain.com/cv_of_afroz_hossain.pdf");
   }
 
   void _hireMe() {
@@ -75,13 +92,17 @@ class _MainPageState extends State<MainPage> {
         children: <Widget>[
           Opacity(
             opacity: 0,
-            child: Navigation((_) {}),
+            child: Navigation(
+              (_) {},
+              networkData: allData,
+            ),
           ),
           Positioned.fill(
             child: HomePage(
               key: keys[0],
               downloadCV: _downloadCV,
               hireMe: _hireMe,
+              networkData: allData,
             ),
           )
         ],
@@ -109,7 +130,7 @@ class _MainPageState extends State<MainPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             const SizedBox(height: VERTICAL_PADDING_SIZE),
-            Visibility(visible: !forTablet, child: const AppTabBar()),
+            Visibility(visible: !forTablet, child: AppTabBar(networkData: allData,)),
             _homePage(),
             pagePadding(),
             // BasePage(
@@ -145,9 +166,12 @@ class _MainPageState extends State<MainPage> {
   Widget _buildNavigation(bool forTablet) {
     return Padding(
       padding: EdgeInsets.only(top: forTablet ? VERTICAL_PADDING_SIZE : 0),
-      child: Navigation((index) {
-        scrollToIndex(index);
-      }),
+      child: Navigation(
+        (index) {
+          scrollToIndex(index);
+        },
+        networkData: allData,
+      ),
     );
   }
 
