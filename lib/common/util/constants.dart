@@ -1,8 +1,8 @@
 class Constants {
   const Constants._();
 
-  static const String baseUrl = 'http://cvbackend.afrozhossain.com/api/';
-  static const String imageBaseUrl = 'http://cvbackend.afrozhossain.com/';
+  static const String baseUrl = 'https://cvbackend.afrozhossain.com/api/';
+  static const String imageBaseUrl = 'https://cvbackend.afrozhossain.com/';
 
   static const timeout = Duration(seconds: 30);
 

@@ -55,7 +55,7 @@ class Navigation extends StatelessWidget {
         },
         elevation: 2,
         backgroundColor: SUB_COLOR,
-        child: CustomImageWidget(context: context, imageUrl: icon,height: 16, )
+        child: CustomImageWidget(context: context, imageUrl: icon,height: 16, radius: 50,)
       ),
     );
   }

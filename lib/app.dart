@@ -75,7 +75,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   void _downloadCV() {
-    launchUrlString("http://afrozhossain.com/cv_of_afroz_hossain.pdf");
+    launchUrlString("https://www.afrozhossain.com/cv_of_afroz_hossain.pdf");
   }
 
   void _hireMe() {

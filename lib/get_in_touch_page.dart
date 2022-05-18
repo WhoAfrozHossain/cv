@@ -136,7 +136,13 @@ class _GetInTouchPageState extends State<GetInTouchPage> {
         .postContact(nameController.text, emailController.text,
             subjectController.text, messageController.text)
         .then((value) {
-      
+      if (value == true) {
+        nameController.clear();
+        emailController.clear();
+        subjectController.clear();
+        messageController.clear();
+      }
+
       setState(() {
         isSubmitting = false;
       });
