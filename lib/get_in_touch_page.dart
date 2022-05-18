@@ -1,11 +1,15 @@
 import 'package:cv/app.dart';
 import 'package:cv/base_page.dart';
-import 'package:cv/data.dart';
+import 'package:cv/network/models/all_data_model.dart';
+import 'package:cv/network/network_controller.dart';
 import 'package:cv/page_title.dart';
 import 'package:flutter/material.dart';
 
 class GetInTouchPage extends StatefulWidget {
-  const GetInTouchPage(GlobalKey key) : super(key: key);
+  final AllDataModel? networkData;
+
+  const GetInTouchPage(GlobalKey key, {required this.networkData})
+      : super(key: key);
 
   @override
   State<GetInTouchPage> createState() => _GetInTouchPageState();
@@ -124,12 +128,19 @@ class _GetInTouchPageState extends State<GetInTouchPage> {
   }
 
   void submit() async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("This feature was removed :D"),
-        backgroundColor: Colors.red,
-      ),
-    );
+    setState(() {
+      isSubmitting = true;
+    });
+
+    await NetworkController(context: context)
+        .postContact(nameController.text, emailController.text,
+            subjectController.text, messageController.text)
+        .then((value) {
+      
+      setState(() {
+        isSubmitting = false;
+      });
+    });
   }
 
   Widget buildTabletLayout() {
@@ -143,7 +154,8 @@ class _GetInTouchPageState extends State<GetInTouchPage> {
             children: <Widget>[
               SizedBox(
                 width: 256,
-                child: buildContactItem(Icons.call, "Phone", Data.PHONE_NUMBER),
+                child: buildContactItem(Icons.call, "Phone",
+                    widget.networkData?.data?.info?.phone ?? ""),
               ),
               Expanded(
                 flex: 2,
@@ -168,7 +180,8 @@ class _GetInTouchPageState extends State<GetInTouchPage> {
             children: <Widget>[
               SizedBox(
                 width: 256,
-                child: buildContactItem(Icons.email, "Email", Data.EMAIL),
+                child: buildContactItem(Icons.email, "Email",
+                    widget.networkData?.data?.info?.email ?? ""),
               ),
               Expanded(
                 flex: 2,
@@ -182,8 +195,8 @@ class _GetInTouchPageState extends State<GetInTouchPage> {
           children: <Widget>[
             SizedBox(
               width: 256,
-              child: buildContactItem(
-                  Icons.my_location, "Location", Data.LOCATION),
+              child: buildContactItem(Icons.my_location, "Location",
+                  widget.networkData?.data?.info?.location ?? ""),
             ),
             Expanded(
               flex: 2,
@@ -214,11 +227,14 @@ class _GetInTouchPageState extends State<GetInTouchPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        buildContactItem(Icons.call, "Phone", Data.PHONE_NUMBER),
+        buildContactItem(
+            Icons.call, "Phone", widget.networkData?.data?.info?.phone ?? ""),
         space,
-        buildContactItem(Icons.email, "Email", Data.EMAIL),
+        buildContactItem(
+            Icons.email, "Email", widget.networkData?.data?.info?.email ?? ""),
         space,
-        buildContactItem(Icons.my_location, "Location", Data.LOCATION),
+        buildContactItem(Icons.my_location, "Location",
+            widget.networkData?.data?.info?.location ?? ""),
         space,
         buildTextFormField("Your name", nameController),
         smallSpace,
@@ -255,14 +271,14 @@ class _GetInTouchPageState extends State<GetInTouchPage> {
                       : buildPhoneLayout();
                 },
               ),
-              const SizedBox(height: 32),
-              Text(
-                'Note: Submit function is not work anymore, but I keep it here because it\'s beautiful ^^',
-                style: Theme.of(context).textTheme.caption?.copyWith(
-                      fontStyle: FontStyle.italic,
-                      color: Colors.deepOrange,
-                    ),
-              )
+              // const SizedBox(height: 32),
+              // Text(
+              //   'Note: Submit function is not work anymore, but I keep it here because it\'s beautiful ^^',
+              //   style: Theme.of(context).textTheme.caption?.copyWith(
+              //         fontStyle: FontStyle.italic,
+              //         color: Colors.deepOrange,
+              //       ),
+              // )
             ],
           ),
         ),

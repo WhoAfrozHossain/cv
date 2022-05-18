@@ -44,7 +44,7 @@ class RepositoryHelper {
       final responseData =
           await response.stream.transform(utf8.decoder).join();
 
-      log(responseData);
+      debugPrint(responseData);
 
       var decodedJson = {};
       try {

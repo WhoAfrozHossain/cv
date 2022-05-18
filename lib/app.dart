@@ -61,7 +61,8 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 1)).then((value) => getNetworkAllData());
+    Future.delayed(const Duration(microseconds: 1))
+        .then((value) => getNetworkAllData());
     super.initState();
   }
 
@@ -130,7 +131,11 @@ class _MainPageState extends State<MainPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             const SizedBox(height: VERTICAL_PADDING_SIZE),
-            Visibility(visible: !forTablet, child: AppTabBar(networkData: allData,)),
+            Visibility(
+                visible: !forTablet,
+                child: AppTabBar(
+                  networkData: allData,
+                )),
             _homePage(),
             pagePadding(),
             // BasePage(
@@ -140,13 +145,27 @@ class _MainPageState extends State<MainPage> {
             //   ),
             // ),
             // pagePadding(),
-            AboutPage(keys[1], _downloadCV, _hireMe),
+            AboutPage(
+              keys[1],
+              _downloadCV,
+              _hireMe,
+              networkData: allData,
+            ),
             pagePadding(),
-            MySkillPage(keys[2]),
+            MySkillPage(
+              keys[2],
+              networkData: allData,
+            ),
             pagePadding(),
-            CompanyPage(keys[3]),
+            CompanyPage(
+              keys[3],
+              networkData: allData,
+            ),
             pagePadding(),
-            GetInTouchPage(keys[4]),
+            GetInTouchPage(
+              keys[4],
+              networkData: allData,
+            ),
           ],
         ),
       ),

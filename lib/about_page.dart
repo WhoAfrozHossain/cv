@@ -1,28 +1,11 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:cv/network/models/all_data_model.dart';
 import 'package:cv/page_title.dart';
+import 'package:cv/widget/custom_image_widget.dart';
 import 'package:flutter/material.dart';
-
 import 'app.dart';
 import 'base_page.dart';
-import 'data.dart';
-
-const INTRODUCE =
-    "I am Afroz, Mobile Developer from Dhaka, Bangladesh. I have rich experience in Mobile application development, I am good at Flutter.";
-
-const SKILLS = """
-Android (Both Java and Kotlin):
-- Have 4 years+ experience in Android development.
-- Familiar with MVC, MVP, MVVM, MVRX (AirBnb), Clean architecture,...
-- Familiar with Android Jetpack, RxJava, FCM, Firebase, Google map, Socket, MQTT, Dagger, Koin...
-
-Flutter:
-- Have 3 year+ experience in Flutter.
-- Familiar with Bloc, ScopeModel, Provider,...
-
-Confident in Algorithm, OOP concepts, Design Pattern, SOLID principles,...
-Proficient in using git.
-""";
 
 const AVATAR_SIZE = 108.0;
 
@@ -30,7 +13,10 @@ class AboutPage extends StatelessWidget {
   final VoidCallback? downloadCV;
   final VoidCallback? hireMe;
 
-  const AboutPage(GlobalKey key, this.downloadCV, this.hireMe)
+  final AllDataModel? networkData;
+
+  const AboutPage(GlobalKey key, this.downloadCV, this.hireMe,
+      {required this.networkData})
       : super(key: key);
 
   Widget _multiChildLayout({
@@ -94,12 +80,13 @@ class AboutPage extends StatelessWidget {
                   forTablet: isTabletSize,
                   children: <Widget>[
                     const SizedBox(width: 16),
-                    const SizedBox(
+                    SizedBox(
                       width: avatarSize,
                       height: avatarSize,
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage(Data.AVATAR),
-                        backgroundColor: Colors.white,
+                      child: CustomImageWidget(
+                        context: context,
+                        imageUrl: networkData?.data?.info?.photo,
+                        radius: avatarSize,
                       ),
                     ),
                     const SizedBox(width: 36, height: 32),
@@ -115,28 +102,28 @@ class AboutPage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 24),
-                          const Text(
-                            INTRODUCE,
-                            style: TextStyle(
+                          Text(
+                            networkData?.data?.info?.aboutMe ?? "",
+                            style: const TextStyle(
                               fontSize: 14,
                               color: Colors.grey,
                             ),
                           ),
                           const SizedBox(height: 24),
-                          LayoutBuilder(
-                            builder: (_, constrains) => Wrap(
-                              direction: Axis.horizontal,
-                              children: Data.ABOUT_PAGE_INFO.entries
-                                  .toList()
-                                  .map((pair) => SizedBox(
-                                      width: isTabletSize
-                                          ? constrains.maxWidth / 2
-                                          : constrains.maxWidth,
-                                      child:
-                                          _buildInfoLine(pair.key, pair.value)))
-                                  .toList(),
-                            ),
-                          ),
+                          // LayoutBuilder(
+                          //   builder: (_, constrains) => Wrap(
+                          //     direction: Axis.horizontal,
+                          //     children: Data.ABOUT_PAGE_INFO.entries
+                          //         .toList()
+                          //         .map((pair) => SizedBox(
+                          //             width: isTabletSize
+                          //                 ? constrains.maxWidth / 2
+                          //                 : constrains.maxWidth,
+                          //             child:
+                          //                 _buildInfoLine(pair.key, pair.value)))
+                          //         .toList(),
+                          //   ),
+                          // ),
                           const SizedBox(width: 36, height: 16),
                           Wrap(
                             runSpacing: 12,

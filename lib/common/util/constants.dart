@@ -12,5 +12,5 @@ class Constants {
   static const String placeHolderBlurHash = 'LEHV6nWB2yk8pyo0adR*.7kCMdnj';
 
   static const String getAllData = "all";
-  static const String postContact = "contact";
+  static const String postContact = "contactstore";
 }

@@ -1,43 +1,38 @@
 import 'package:cv/app.dart';
+import 'package:cv/network/models/all_data_model.dart';
+import 'package:cv/network/models/job_model.dart';
 import 'package:cv/page_title.dart';
 import 'package:cv/widget/animated_text.dart';
+import 'package:cv/widget/custom_image_widget.dart';
 import 'package:cv/widget/react_button.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'base_page.dart';
 
-final companies = [
-  Company(
-    imagePath: "image/samsung.png",
-    name: "SAMSUNG",
-    time: "1 year 2 months",
-  ),
-  Company(
-    imagePath: "image/vti.png",
-    name: "VTI",
-    time: "1 year",
-  ),
-  Company(
-    imagePath: "image/tiki.png",
-    name: "Tiki",
-    time: "4 months",
-  ),
-  Company(
-    imagePath: "image/vingroup.png",
-    name: "Vingroup",
-    time: "Current company",
-  ),
-];
-
 class CompanyPage extends StatefulWidget {
-  const CompanyPage(GlobalKey key) : super(key: key);
+  final AllDataModel? networkData;
+
+  const CompanyPage(GlobalKey key, {required this.networkData})
+      : super(key: key);
 
   @override
   State<CompanyPage> createState() => _CompanyPageState();
 }
 
 class _CompanyPageState extends State<CompanyPage> {
-  Widget _buildCompany(Company company) {
+  Widget _buildCompany(JobModel company) {
+    String status = "";
+
+    if (company.endDate == null) {
+      status = "Current Company";
+    } else {
+      DateTime start = DateTime.parse(company.startDate!);
+      DateTime end = DateTime.parse(company.endDate!);
+
+      status = "${(end.difference(start).inDays / 30).floor()} Months";
+    }
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -64,7 +59,7 @@ class _CompanyPageState extends State<CompanyPage> {
                             borderRadius: BorderRadius.circular(32),
                           ),
                           child: Text(
-                            company.time,
+                            status,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 12,
@@ -77,11 +72,17 @@ class _CompanyPageState extends State<CompanyPage> {
                         child: Container(
                           alignment: Alignment.center,
                           color: Colors.grey.withAlpha(24),
-                          child: Image.asset(
-                            company.imagePath,
+                          child: CustomImageWidget(
+                            context: context,
+                            imageUrl: company.logo,
                             fit: BoxFit.fitHeight,
                             height: 64,
                           ),
+                          // child: Image.asset(
+                          //   company.imagePath,
+                          //   fit: BoxFit.fitHeight,
+                          //   height: 64,
+                          // ),
                         ),
                       ),
                     ],
@@ -91,9 +92,16 @@ class _CompanyPageState extends State<CompanyPage> {
             ),
             const SizedBox(height: 12),
             AnimatedText(
-              text: company.name,
+              text: company.companyName ?? "",
               onTap: () {},
-            )
+            ),
+            Text(
+              "${DateFormat.yMMMd().format(DateTime.parse(company.startDate!))} - ${company.endDate == null ? "Till Now" : DateFormat.yMMMd().format(DateTime.parse(company.endDate!))}",
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 12,
+              ),
+            ),
           ],
         ),
         const SizedBox(width: 12)
@@ -102,6 +110,8 @@ class _CompanyPageState extends State<CompanyPage> {
   }
 
   Widget _buildCompanies() {
+    List<JobModel> companies = widget.networkData?.data?.job ?? [];
+
     return SingleChildScrollView(
       padding: const EdgeInsets.only(left: HORIZONTAL_PAGE_PADDING),
       scrollDirection: Axis.horizontal,
@@ -136,14 +146,14 @@ class _CompanyPageState extends State<CompanyPage> {
   }
 }
 
-class Company {
-  String imagePath;
-  String name;
-  String time;
+// class Company {
+//   String imagePath;
+//   String name;
+//   String time;
 
-  Company({
-    required this.imagePath,
-    required this.name,
-    required this.time,
-  });
-}
+//   Company({
+//     required this.imagePath,
+//     required this.name,
+//     required this.time,
+//   });
+// }

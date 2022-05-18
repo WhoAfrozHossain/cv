@@ -22,7 +22,7 @@ class NetworkController {
     return allData;
   }
 
-  void postContact(String name, String email, String subject, String message,) async {
+  Future<bool> postContact(String name, String email, String subject, String message,) async {
     Map<String, String> body = {
       'name': name,
       'email': email,
@@ -32,10 +32,11 @@ class NetworkController {
 
     final response = await FrontEndRepository(context: context).postContact(body);
     if (response.id == ResponseCode.SUCCESSFUL) {
-      // allData = AllDataModel.fromJson(json.decode(response.object.toString()));
-      // showErrorToast(response.object.toString());
+      showSuccessToast("Message send successfully");
+      return true;
     } else {
-      showErrorToast(response.object.toString());
+      showErrorToast("Message not send");
+      return false;
     }
   }
 }

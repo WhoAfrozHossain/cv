@@ -1,64 +1,75 @@
 import 'package:cv/app.dart';
 import 'package:cv/base_page.dart';
+import 'package:cv/network/models/all_data_model.dart';
+import 'package:cv/network/models/platform_model.dart';
 import 'package:cv/page_title.dart';
 import 'package:flutter/material.dart';
 
-import 'about_page.dart';
-
 class MySkillPage extends StatefulWidget {
-  const MySkillPage(GlobalKey key) : super(key: key);
+  final AllDataModel? networkData;
+
+  const MySkillPage(GlobalKey key, {required this.networkData})
+      : super(key: key);
 
   @override
   State<MySkillPage> createState() => _MySkillPageState();
 }
 
 class _MySkillPageState extends State<MySkillPage> {
-  Widget _buildSkillItem(Skill skill) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            Text(
-              skill.name,
+  Widget _buildSkillItem(PlatformModel skill) {
+
+    return Text(
+              skill.title ?? "",
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-            Text(
-              "${skill.percent}%",
-              style: const TextStyle(fontSize: 14),
-            )
-          ],
-        ),
-        const SizedBox(height: 8),
-        Stack(
-          children: <Widget>[
-            Container(
-              height: 3,
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(.5),
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            FractionallySizedBox(
-              widthFactor: skill.percent / 100,
-              child: Container(
-                height: 3,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            )
-          ],
-        ),
-      ],
-    );
+            );
+    // return Column(
+    //   mainAxisSize: MainAxisSize.min,
+    //   children: <Widget>[
+    //     Row(
+    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //       crossAxisAlignment: CrossAxisAlignment.end,
+    //       children: <Widget>[
+    //         Text(
+    //           skill.title ?? "",
+    //           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+    //         ),
+    //         Text(
+    //           "${skill.percent}%",
+    //           style: const TextStyle(fontSize: 14),
+    //         )
+    //       ],
+    //     ),
+    //     const SizedBox(height: 8),
+    //     Stack(
+    //       children: <Widget>[
+    //         Container(
+    //           height: 3,
+    //           decoration: BoxDecoration(
+    //             color: Colors.grey.withOpacity(.5),
+    //             borderRadius: BorderRadius.circular(12),
+    //           ),
+    //         ),
+    //         FractionallySizedBox(
+    //           widthFactor: skill.percent / 100,
+    //           child: Container(
+    //             height: 3,
+    //             decoration: BoxDecoration(
+    //               color: Colors.red,
+    //               borderRadius: BorderRadius.circular(12),
+    //             ),
+    //           ),
+    //         )
+    //       ],
+    //     ),
+    //   ],
+    // );
   }
 
   @override
   Widget build(BuildContext context) {
+
+    List<PlatformModel> skills = widget.networkData?.data?.platform ?? [];
+
     return BasePage(
       color: Colors.white,
       child: Padding(
@@ -68,9 +79,9 @@ class _MySkillPageState extends State<MySkillPage> {
           children: <Widget>[
             const PageTitle("My skills"),
             const SizedBox(height: 32),
-            const Text(
-              SKILLS,
-              style: TextStyle(
+            Text(
+              widget.networkData?.data?.info?.skill ?? "",
+              style: const TextStyle(
                 fontSize: 14,
                 color: Colors.grey,
               ),
@@ -87,9 +98,9 @@ class _MySkillPageState extends State<MySkillPage> {
                   runSpacing: 24,
                   children: skills
                       .map(
-                        (it) => SizedBox(
+                        (skill) => SizedBox(
                           width: skillWidth,
-                          child: _buildSkillItem(it),
+                          child: _buildSkillItem(skill),
                         ),
                       )
                       .toList(),
@@ -102,20 +113,3 @@ class _MySkillPageState extends State<MySkillPage> {
     );
   }
 }
-
-class Skill {
-  String name;
-  int percent;
-
-  Skill({
-    required this.name,
-    required this.percent,
-  });
-}
-
-final skills = [
-  Skill(name: "Flutter", percent: 85),
-  Skill(name: "Android", percent: 85),
-  Skill(name: "Java", percent: 80),
-  Skill(name: "Kotlin", percent: 80),
-];

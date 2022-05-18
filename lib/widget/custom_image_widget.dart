@@ -47,7 +47,7 @@ class CustomImageWidget extends StatelessWidget {
 
     return (radius != null || borderRadius != null)
         ? ClipRRect(
-            borderRadius: borderRadius ?? BorderRadius.circular(0),
+            borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 0),
             child: child,
           )
         : child;
