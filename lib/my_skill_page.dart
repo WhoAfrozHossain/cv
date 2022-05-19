@@ -4,6 +4,7 @@ import 'package:cv/network/models/all_data_model.dart';
 import 'package:cv/network/models/platform_model.dart';
 import 'package:cv/page_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class MySkillPage extends StatefulWidget {
   final AllDataModel? networkData;
@@ -17,11 +18,10 @@ class MySkillPage extends StatefulWidget {
 
 class _MySkillPageState extends State<MySkillPage> {
   Widget _buildSkillItem(PlatformModel skill) {
-
     return Text(
-              skill.title ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            );
+      skill.title ?? "",
+      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+    );
     // return Column(
     //   mainAxisSize: MainAxisSize.min,
     //   children: <Widget>[
@@ -67,7 +67,6 @@ class _MySkillPageState extends State<MySkillPage> {
 
   @override
   Widget build(BuildContext context) {
-
     List<PlatformModel> skills = widget.networkData?.data?.platform ?? [];
 
     return BasePage(
@@ -78,35 +77,42 @@ class _MySkillPageState extends State<MySkillPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const PageTitle("My skills"),
-            const SizedBox(height: 32),
-            Text(
-              widget.networkData?.data?.info?.skill ?? "",
-              style: const TextStyle(
-                fontSize: 14,
-                color: Colors.grey,
+            const SizedBox(height: 20),
+            // Text(
+            //   widget.networkData?.data?.info?.skill ?? "",
+            //   style: const TextStyle(
+            //     fontSize: 14,
+            //     color: Colors.grey,
+            //   ),
+            // ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Html(
+                shrinkWrap: true,
+                data: widget.networkData?.data?.info?.skill ?? "",
               ),
             ),
-            const SizedBox(height: 24),
-            LayoutBuilder(
-              builder: (_, constrain) {
-                final maxWidth = constrain.maxWidth;
-                const widthForTablet = 500;
-                final skillWidth =
-                    maxWidth > widthForTablet ? (maxWidth - 24) / 2 : maxWidth;
-                return Wrap(
-                  spacing: 24,
-                  runSpacing: 24,
-                  children: skills
-                      .map(
-                        (skill) => SizedBox(
-                          width: skillWidth,
-                          child: _buildSkillItem(skill),
-                        ),
-                      )
-                      .toList(),
-                );
-              },
-            )
+            // const SizedBox(height: 24),
+            // LayoutBuilder(
+            //   builder: (_, constrain) {
+            //     final maxWidth = constrain.maxWidth;
+            //     const widthForTablet = 500;
+            //     final skillWidth =
+            //         maxWidth > widthForTablet ? (maxWidth - 24) / 2 : maxWidth;
+            //     return Wrap(
+            //       spacing: 24,
+            //       runSpacing: 24,
+            //       children: skills
+            //           .map(
+            //             (skill) => SizedBox(
+            //               width: skillWidth,
+            //               child: _buildSkillItem(skill),
+            //             ),
+            //           )
+            //           .toList(),
+            //     );
+            //   },
+            // )
           ],
         ),
       ),

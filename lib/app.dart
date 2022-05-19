@@ -61,8 +61,11 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    Future.delayed(const Duration(microseconds: 1))
-        .then((value) => getNetworkAllData());
+    Future.delayed(const Duration(microseconds: 1)).then((value) {
+      showAlertDialog(context);
+      getNetworkAllData();
+    });
+
     super.initState();
   }
 
@@ -72,6 +75,30 @@ class _MainPageState extends State<MainPage> {
         allData = value;
       });
     });
+  }
+
+  showAlertDialog(BuildContext context) {
+    Widget okButton = TextButton(
+      child: const Text("Continue"),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: const Text("Under Construction"),
+      content: const Text("This site is in under construction."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   void _downloadCV() {
