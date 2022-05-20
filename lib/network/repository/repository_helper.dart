@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:cv/common/util/constants.dart';
 import 'package:cv/common/util/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,7 +17,7 @@ class RepositoryHelper {
     Map<String, String>? headers,
     List<http.MultipartFile>? files,
   }) async {
-    Utils.loadingDialog(context);
+    // Utils.loadingDialog(context);
 
     Uri uri = Uri.parse(Constants.baseUrl + url);
 
@@ -41,8 +40,7 @@ class RepositoryHelper {
 
       final response = await request.send().timeout(Constants.timeout);
 
-      final responseData =
-          await response.stream.transform(utf8.decoder).join();
+      final responseData = await response.stream.transform(utf8.decoder).join();
 
       debugPrint(responseData);
 
@@ -54,7 +52,7 @@ class RepositoryHelper {
       }
 
       // ignore: use_build_context_synchronously
-      Utils.closeDialog(context);
+      // Utils.closeDialog(context);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         if (decodedJson['response'].toString().toLowerCase() == 'error') {
@@ -86,7 +84,7 @@ class RepositoryHelper {
             object: 'Status code for request ${response.statusCode}');
       }
     } catch (e) {
-      Utils.closeDialog(context);
+      // Utils.closeDialog(context);
 
       log(e.toString());
       log(uri.toString());

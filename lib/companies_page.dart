@@ -72,6 +72,7 @@ class _CompanyPageState extends State<CompanyPage> {
                         child: Container(
                           alignment: Alignment.center,
                           color: Colors.grey.withAlpha(24),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: CustomImageWidget(
                             context: context,
                             imageUrl: company.logo,

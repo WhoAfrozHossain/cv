@@ -105,9 +105,9 @@ class Navigation extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 4),
-              const Text(
-                "Mobile developer",
-                style: TextStyle(
+              Text(
+                networkData?.data?.info?.post ?? "",
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w200,
                   fontSize: 14,
@@ -120,10 +120,10 @@ class Navigation extends StatelessWidget {
               _buildNavigationOption("About", Icons.account_box, onTap: () {
                 onTap(1);
               }),
-              _buildNavigationOption("Resume", Icons.book, onTap: () {
+              _buildNavigationOption("Skills", Icons.book, onTap: () {
                 onTap(2);
               }),
-              _buildNavigationOption("Work", Icons.work, onTap: () {
+              _buildNavigationOption("Companies", Icons.work, onTap: () {
                 onTap(3);
               }),
               _buildNavigationOption("Contact", Icons.contacts, onTap: () {
