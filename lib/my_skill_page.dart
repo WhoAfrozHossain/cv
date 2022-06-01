@@ -67,7 +67,7 @@ class _MySkillPageState extends State<MySkillPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<PlatformModel> skills = widget.networkData?.data?.platform ?? [];
+    // List<PlatformModel> skills = widget.networkData?.data?.platform ?? [];
 
     return BasePage(
       color: Colors.white,
