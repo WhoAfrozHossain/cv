@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -18,15 +19,17 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
   <title>Afroz Hossain</title>
-  
-  <meta name="keyworkds" content="Afroz, Afroz Hossain, Flutter, Flutter Developer, Mobile, Mobile App Developer, Android, Android Developer, Software Developer, WhoAfrozHossain, Who Afroz Hossain" />
-  
-  <meta name="og:description" content="I'm a freelancer mobile app developer. Develop android and ios app using flutter & android app using java or kotlin.">
-  
+
+  <meta name="keyworkds"
+    content="Afroz, Afroz Hossain, Flutter, Flutter Developer, Mobile, Mobile App Developer, Android, Android Developer, Software Developer, WhoAfrozHossain, Who Afroz Hossain" />
+
+  <meta name="og:description"
+    content="I'm a freelancer mobile app developer. Develop android and ios app using flutter & android app using java or kotlin.">
+
   <meta property="og:image" content="https://www.afrozhossain.com/img/afroz.jpg">
-  
+
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="CV of Afroz Hossain.">
 
@@ -45,7 +48,7 @@
   <link rel="apple-touch-icon" sizes="144x144" href="icons/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="icons/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
@@ -57,11 +60,61 @@
 
   <!-- <title>Afroz Hossain</title> -->
   <link rel="manifest" href="manifest.json">
+
+  <style>
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border: 15px solid ;
+      border-top: 16px solid blue;
+      border-right: 16px solid white;
+      border-bottom: 16px solid blue;
+      border-left: 16px solid white;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+    
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+    
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
+
 <body>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <div class="loading">
+    <div class="loader"></div>
+  </div>
   <script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
@@ -126,5 +179,13 @@
       loadMainDartJs();
     }
   </script>
+
+  <script>
+    const regExp = new RegExp("bot|google|baidu|bing|msn|teoma|slurp|yandex", "i");
+    if (regExp.test(navigator.userAgent)) {
+      window.flutterWebRenderer = "html";
+    }
+  </script>
 </body>
+
 </html>
