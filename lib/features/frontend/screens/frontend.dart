@@ -1,5 +1,5 @@
 import 'package:cv/core/utils/values_manager.dart';
-import 'package:cv/core/widgets/custom_text_widget.dart';
+import 'package:cv/features/frontend/screens/function/frontend_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -39,31 +39,6 @@ class FrontendPage extends StatelessWidget {
   //     });
   //   });
   // }
-
-  showAlertDialog() {
-    Widget okButton = TextButton(
-      child: const CustomTextWidget(text: "Continue"),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-
-    AlertDialog alert = AlertDialog(
-      title: const CustomTextWidget(text: "Under Construction"),
-      content:
-          const CustomTextWidget(text: "This site is in under construction."),
-      actions: [
-        okButton,
-      ],
-    );
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
 
   void _downloadCV() {
     launchUrlString("https://www.afrozhossain.com/cv_of_afroz_hossain.pdf");
@@ -214,6 +189,8 @@ class FrontendPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     this.context = context;
+
+    sl<FrontendFunctions>().init(context);
 
     return BlocProvider(
       create: (_) => FrontendBloc(

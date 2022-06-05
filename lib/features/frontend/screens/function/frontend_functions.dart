@@ -8,11 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cv/core/apphelper/appResponse/app_api_response.dart';
 import 'package:cv/core/error/failures.dart';
 
+import '../../../../core/widgets/custom_text_widget.dart';
 import '../../domain/usecase/frontend_use_case.dart';
 import '../bloc/frontend_bloc.dart';
 
 class FrontendFunctions {
-  BuildContext? context;
+  late BuildContext context;
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -27,12 +28,14 @@ class FrontendFunctions {
     this.context = context;
 
     // BlocProvider.of<ProductBloc>(context).add(GetProductListEvent());
-    BlocProvider.of<FrontendBloc>(context).add(GetFrontendDataEvent());
+    // BlocProvider.of<FrontendBloc>(context).add(GetFrontendDataEvent());
   }
 
   Future getFrontendData(GetFrontendDataEvent event,
       Emitter<FrontendState> emit, FrontendUseCase frontendUseCase) async {
     emit(FrontendLoadingState());
+
+    showAlertDialog();
 
     Either<Failure, AppApiResponse> _res =
         await frontendUseCase.call(FrontendDataPrams());
@@ -48,6 +51,31 @@ class FrontendFunctions {
 
       emit(FrontendDataSuccessState(frontendData: frontendDataModel));
     });
+  }
+
+  showAlertDialog() {
+    Widget okButton = TextButton(
+      child: const CustomTextWidget(text: "Continue"),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: const CustomTextWidget(text: "Under Construction"),
+      content:
+          const CustomTextWidget(text: "This site is in under construction."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   Future postStoreContact(PostStoreContactEvent event,

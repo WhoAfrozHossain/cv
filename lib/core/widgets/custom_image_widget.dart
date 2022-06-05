@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:cv/core/appRemoteHelper/app_url.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 
 class CustomImageWidget extends StatelessWidget {
   final BuildContext context;
@@ -59,19 +60,23 @@ class CustomImageWidget extends StatelessWidget {
                       false) ||
                   imageUrl!.startsWith('http') ||
                   (!imageUrl!.startsWith('asset') && kIsWeb)
-              ? OctoImage(
-                  image: CachedNetworkImageProvider(
-                    imageUrl ?? AppUrls.dummyImageUrl,
+              ? ImageRenderer(
+                  alt: 'Afroz Hossain',
+                  src: imageUrl,
+                  child: OctoImage(
+                    image: CachedNetworkImageProvider(
+                      imageUrl ?? AppUrls.dummyImageUrl,
+                    ),
+                    placeholderBuilder: OctoPlaceholder.blurHash(
+                      AppUrls.placeHolderBlurHash,
+                    ),
+                    errorBuilder: (context, error, stackTrace) {
+                      return placeholder;
+                    },
+                    fit: fit ?? BoxFit.cover,
+                    width: MediaQuery.of(context).size.width,
+                    color: color,
                   ),
-                  placeholderBuilder: OctoPlaceholder.blurHash(
-                    AppUrls.placeHolderBlurHash,
-                  ),
-                  errorBuilder: (context, error, stackTrace) {
-                    return placeholder;
-                  },
-                  fit: fit ?? BoxFit.cover,
-                  width: MediaQuery.of(context).size.width,
-                  color: color,
                 )
               : (File(imageUrl!).existsSync()
                   ? Image.file(

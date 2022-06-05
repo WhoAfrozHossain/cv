@@ -5,6 +5,7 @@ import 'package:cv/core/utils/utils_export.dart';
 import 'package:cv/inject_container.dart';
 import 'package:cv/core/url_strategy/url_strategy_native.dart'
     if (dart.library.html) 'package:cv/core/url_strategy/url_strategy_web.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 import 'core/apphelper/app_helper.dart';
 
 GetIt sl = GetIt.instance;
@@ -22,7 +23,10 @@ void main() async {
       statusBarColor: ColorManager.primaryColor,
     ),
   );
-  runApp(MyApp());
+  runApp(RobotDetector(
+    debug: false, // you can set true to enable robot mode
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

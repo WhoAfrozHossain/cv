@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cv/core/utils/utils_export.dart';
 import 'package:flutter_html/flutter_html.dart' as html;
+import 'package:seo_renderer/seo_renderer.dart';
 
 class CustomTextWidget extends StatelessWidget {
   final String text;
@@ -31,22 +32,25 @@ class CustomTextWidget extends StatelessWidget {
                 ? double.infinity
                 : 10,
       ),
-      child: isHtml
-          ? html.Html(
-              shrinkWrap: true,
-              data: text,
-            )
-          : Text(
-              text,
-              maxLines: maxLine,
-              // overflow: TextOverflow.ellipsis,
-              style: style ??
-                  getRegularStyle(
-                    color: ColorManager.black,
-                    fontSize: FontSize.s14,
-                  ),
-              textAlign: align ?? TextAlign.justify,
-            ),
+      child: TextRenderer(
+        text: text,
+        child: isHtml
+            ? html.Html(
+                shrinkWrap: true,
+                data: text,
+              )
+            : Text(
+                text,
+                maxLines: maxLine,
+                // overflow: TextOverflow.ellipsis,
+                style: style ??
+                    getRegularStyle(
+                      color: ColorManager.black,
+                      fontSize: FontSize.s14,
+                    ),
+                textAlign: align ?? TextAlign.justify,
+              ),
+      ),
     );
   }
 }
