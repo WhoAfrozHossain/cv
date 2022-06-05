@@ -135,10 +135,11 @@ class _CompanyPageState extends State<CompanyPage> {
               child: CustomTextWidget(
                 text: "Companies",
                 style: getBoldStyle(
+                  color: ColorManager.black,
                   fontSize: FontSize.s24,
                 ),
               )),
-          const SizedBox(height: 64),
+          const SizedBox(height: 40),
           _buildCompanies(),
           const SizedBox(height: 32),
         ],

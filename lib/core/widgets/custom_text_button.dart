@@ -50,14 +50,14 @@ class CustomTextButton extends StatelessWidget {
       },
       // style: ThemeData().textButtonTheme.style!.copyWith(
         style: ButtonStyle(
-            minimumSize: MaterialStateProperty.resolveWith<Size>(
-              (states) => buttonWidth == null
-                  ? Size.fromHeight(height)
-                  : Size(
-                      buttonWidth!,
-                      height,
-                    ),
-            ),
+            // minimumSize: MaterialStateProperty.resolveWith<Size>(
+            //   (states) => buttonWidth == null
+            //       ? Size.fromHeight(height)
+            //       : Size(
+            //           buttonWidth!,
+            //           height,
+            //         ),
+            // ),
             overlayColor: MaterialStateProperty.resolveWith<Color?>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.pressed)) {

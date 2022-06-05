@@ -1,4 +1,3 @@
-import 'package:flutter_html/flutter_html.dart' as html;
 import 'package:cv/core/widgets/custom_text_widget.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/data/models/platform_model.dart';
@@ -15,6 +14,7 @@ class MySkillPage extends StatefulWidget {
 }
 
 class _MySkillPageState extends State<MySkillPage> {
+  // ignore: unused_element
   Widget _buildSkillItem(PlatformModel skill) {
     return CustomTextWidget(
       text: skill.title ?? "",
@@ -80,57 +80,22 @@ class _MySkillPageState extends State<MySkillPage> {
             CustomTextWidget(
               text: "My skills",
               style: getBoldStyle(
+                color: ColorManager.black,
                 fontSize: FontSize.s24,
               ),
             ),
             const SizedBox(height: 20),
-            // Text(
-            //   widget.networkData?.data?.info?.skill ?? "",
-            //   style: const TextStyle(
-            //     fontSize: 14,
-            //     color: Colors.grey,
-            //   ),
-            // ),
-            CustomTextWidget(
-              text: sl<FrontendFunctions>()
+            if (sl<FrontendFunctions>().frontendDataModel?.data?.info?.skill !=
+                null)
+              CustomTextWidget(
+                text: sl<FrontendFunctions>()
                         .frontendDataModel
                         ?.data
                         ?.info
                         ?.skill ??
                     "",
-                    isHtml: true,
-            ),
-            SizedBox(width: double.infinity,
-            child: html.Html(
-              shrinkWrap: true,
-              data: sl<FrontendFunctions>()
-                        .frontendDataModel
-                        ?.data
-                        ?.info
-                        ?.skill ??
-                    "",
-            ),),
-            // const SizedBox(height: 24),
-            // LayoutBuilder(
-            //   builder: (_, constrain) {
-            //     final maxWidth = constrain.maxWidth;
-            //     const widthForTablet = 500;
-            //     final skillWidth =
-            //         maxWidth > widthForTablet ? (maxWidth - 24) / 2 : maxWidth;
-            //     return Wrap(
-            //       spacing: 24,
-            //       runSpacing: 24,
-            //       children: skills
-            //           .map(
-            //             (skill) => SizedBox(
-            //               width: skillWidth,
-            //               child: _buildSkillItem(skill),
-            //             ),
-            //           )
-            //           .toList(),
-            //     );
-            //   },
-            // )
+                isHtml: true,
+              ),
           ],
         ),
       ),

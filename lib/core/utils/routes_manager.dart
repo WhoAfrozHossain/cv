@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cv/features/_exports/screens_export.dart';
 
 class Routes {
-  static const String frontend = "/";
+  static const String frontend = "/adsf";
   // static const String productList = "/productList";
   // static const String productDetails = "/productDetails";
 }

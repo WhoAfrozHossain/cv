@@ -45,6 +45,7 @@ class AboutPage extends StatelessWidget {
     return maxWidth > 4 * AVATAR_SIZE;
   }
 
+  // ignore: unused_element
   Widget _buildInfoLine(String field, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
@@ -82,6 +83,7 @@ class AboutPage extends StatelessWidget {
                 CustomTextWidget(
                   text: "About Me",
                   style: getBoldStyle(
+                    color: ColorManager.black,
                     fontSize: FontSize.s24,
                   ),
                 ),

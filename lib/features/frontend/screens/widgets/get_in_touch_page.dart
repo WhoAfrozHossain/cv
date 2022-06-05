@@ -47,7 +47,7 @@ class _GetInTouchPageState extends State<GetInTouchPage> {
           vertical: maxLines == 1 ? 0 : 12,
         ),
       ),
-      style: const TextStyle(fontSize: 14),
+      style: TextStyle(fontSize: 14, color: ColorManager.grey),
       cursorColor: ColorManager.secondaryColor,
       validator: (value) {
         if (value!.trim().isEmpty) {
@@ -77,8 +77,9 @@ class _GetInTouchPageState extends State<GetInTouchPage> {
           children: <Widget>[
             CustomTextWidget(
               text: title,
-              style: getBoldStyle(
+              style: getLightStyle(
                 fontSize: FontSize.s16,
+                color: ColorManager.lightGrey
               ),
             ),
             const SizedBox(height: 4),
@@ -296,11 +297,12 @@ class _GetInTouchPageState extends State<GetInTouchPage> {
               CustomTextWidget(
                 text: "Get in touch",
                 style: getBoldStyle(
+                  color: ColorManager.black,
                   fontSize: FontSize.s24,
                 ),
               ),
 
-              const SizedBox(height: 64),
+              const SizedBox(height: 40),
               LayoutBuilder(
                 builder: (_, constrain) {
                   final maxWidth = constrain.maxWidth;

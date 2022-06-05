@@ -60,9 +60,8 @@ class HomePage extends StatelessWidget {
                           ?.info
                           ?.carrierWords ??
                       "",
-                  style: TextStyle(
-                    color: ColorManager.white,
-                    fontWeight: FontWeight.w100,
+                  style: getLightStyle(
+                    color: ColorManager.white.withOpacity(.7),
                     fontSize: FontSize.s16,
                   ),
                 ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/utils/utils_export.dart';
 import '../../../../core/widgets/custom_image_widget.dart';
+import '../../../../core/widgets/custom_text_widget.dart';
 import 'base_page.dart';
 
 class AppTabBar extends StatelessWidget {
@@ -41,32 +42,32 @@ class AppTabBar extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16),
-            RichText(
-              text: TextSpan(
-                children: <TextSpan>[
-                  TextSpan(
+            Row(
+                children: [
+                  CustomTextWidget(
                     text: sl<FrontendFunctions>()
                             .frontendDataModel
                             ?.data
                             ?.info
                             ?.name ??
                         "",
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                    style: getMediumStyle(
+                      color: ColorManager.white,
+                      fontSize: FontSize.s20,
                     ),
                   ),
-                  TextSpan(
-                    text: ' ●',
-                    style: getBoldStyle(
-                      fontSize: FontSize.s14,
+                  const SizedBox(width: 4),
+                  Container(
+                    width: 8,
+                    height: 8,
+                    margin: const EdgeInsets.only(top: 8),
+                    decoration: BoxDecoration(
                       color: ColorManager.secondaryColor,
+                      shape: BoxShape.circle,
                     ),
-                  ),
+                  )
                 ],
               ),
-            ),
           ],
         ),
       ),

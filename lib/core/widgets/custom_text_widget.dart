@@ -22,7 +22,6 @@ class CustomTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Container(
       padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
       constraints: BoxConstraints(
@@ -43,7 +42,7 @@ class CustomTextWidget extends StatelessWidget {
               // overflow: TextOverflow.ellipsis,
               style: style ??
                   getRegularStyle(
-                    color: ColorManager.lightGrey,
+                    color: ColorManager.black,
                     fontSize: FontSize.s14,
                   ),
               textAlign: align ?? TextAlign.justify,

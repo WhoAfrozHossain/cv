@@ -36,7 +36,7 @@ class Navigation extends StatelessWidget {
             const SizedBox(width: 12),
             Text(
               title,
-              style: const TextStyle(color: Colors.white),
+              style: getLightStyle(color: Colors.white, fontSize: FontSize.s14),
             )
           ],
         ),
@@ -99,7 +99,7 @@ class Navigation extends StatelessWidget {
                             ?.info
                             ?.name ??
                         "",
-                    style: getBoldStyle(
+                    style: getMediumStyle(
                       color: ColorManager.white,
                       fontSize: FontSize.s24,
                     ),
@@ -124,9 +124,8 @@ class Navigation extends StatelessWidget {
                         ?.info
                         ?.post ??
                     "",
-                style: TextStyle(
+                style: getLightStyle(
                   color: ColorManager.white,
-                  fontWeight: FontWeight.w200,
                   fontSize: FontSize.s14,
                 ),
               ),
@@ -162,15 +161,15 @@ class Navigation extends StatelessWidget {
               const SizedBox(height: 32),
               Align(
                 alignment: Alignment.bottomLeft,
-                child: Text(
-                  sl<FrontendFunctions>()
+                child: CustomTextWidget(
+                  text: sl<FrontendFunctions>()
                           .frontendDataModel
                           ?.data
                           ?.info
                           ?.email ??
                       "",
                   style: TextStyle(
-                    color: ColorManager.white.withOpacity(.5),
+                    color: ColorManager.white.withOpacity(.7),
                     fontWeight: FontWeight.w100,
                     fontStyle: FontStyle.italic,
                     fontSize: 12,
