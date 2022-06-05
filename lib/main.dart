@@ -34,8 +34,15 @@ class MyApp extends StatelessWidget {
       scaffoldMessengerKey: AppHelper.snackBarKey,
       title: "Afroz Hossain",
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: RouteGenerator.getRoute,
       initialRoute: Routes.frontend,
+      // onUnknownRoute: (RouteSettings settings) {
+      //   return MaterialPageRoute<void>(
+      //     settings: settings,
+      //     builder: (BuildContext context) =>
+      //         Scaffold(body: Center(child: Text('Not Found'))),
+      //   );
+      // },
+      routes: RouteGenerator().routes,
       theme: getApplicationTheme(),
     );
   }
