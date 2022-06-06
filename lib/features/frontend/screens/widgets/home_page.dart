@@ -87,7 +87,9 @@ class HomePage extends StatelessWidget {
                   children: <Widget>[
                     CustomTextButton(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 48, vertical: 24),
+                        horizontal: 40,
+                        vertical: 24,
+                      ),
                       onPressed: downloadCV,
                       buttonColor: ColorManager.secondaryColor,
                       radius: 32,
@@ -110,12 +112,11 @@ class HomePage extends StatelessWidget {
                       onPressed: hireMe,
                       buttonColor: ColorManager.primaryColor,
                       padding: EdgeInsets.symmetric(
-                            horizontal: 48,
-                            vertical: 24,
-                          ),
-                          addBorder: true,
-                          radius: 32,
-                      
+                        horizontal: 40,
+                        vertical: 24,
+                      ),
+                      addBorder: true,
+                      radius: 32,
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: const <Widget>[
